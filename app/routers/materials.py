@@ -39,7 +39,7 @@ def get_material_by_name(name, db: Session = Depends(get_db)):
     return Material
 
 @router.get("/by-code/{code}", response_model=MaterialOut)
-def get_material_by_name(code, db: Session = Depends(get_db)):
+def get_material_by_code(code, db: Session = Depends(get_db)):
     stmt = select(Material).where(func.lower(Material.code) == code.lower())
     material = db.execute(stmt).scalars().first()
     if not material:
